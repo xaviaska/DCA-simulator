@@ -106,11 +106,12 @@ value_user = simulate_dca(data, monthly_investment, allocations, rebalance=rebal
 portfolio_user = value_user.sum(axis=1)
 
 # --- Taula resum ---
-final_value = value_user.iloc[-1]
+final_value = value_user.iloc[-1].astype(float)
 months = len(data)
 invested_per_asset = [monthly_investment * months * a for a in allocations]
-portfolio_final_value = portfolio_user.iloc[-1]
-percent_over_portfolio = (final_value / portfolio_final_value * 100).round(2)
+portfolio_final_value = float(portfolio_user.iloc[-1])
+percent_over_portfolio = ((final_value / portfolio_final_value) * 100).round(2)
+
 
 summary = pd.DataFrame({
     f"Valor final ({currency_symbol})": final_value.round(2),
@@ -174,3 +175,4 @@ for t, pct in zip(value_user.columns, percent_over_portfolio):
 
 plt.tight_layout()
 st.pyplot(fig)
+
