@@ -39,7 +39,8 @@ else:
     n_tickers = st.number_input("Entre quants tickers vols repartir (1 a 5)?", min_value=1, max_value=5, value=4)
     tickers = []
     for i in range(n_tickers):
-        tickers.append(st.text_input(f"Introdueix el ticker {i+1}", value=""))
+        ticker = st.text_input(f"Introdueix el ticker {i+1}", value="")
+        tickers.append(ticker.upper())
 
 # Reequilibri anual
 rebalance = st.checkbox("Vols rebalancejar anualment?")
@@ -175,4 +176,5 @@ for t, pct in zip(value_user.columns, percent_over_portfolio):
 
 plt.tight_layout()
 st.pyplot(fig)
+
 
